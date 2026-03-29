@@ -281,12 +281,45 @@ For cancer type C:
 - **Scattered misclassifications for one class** → That cancer type likely has too few training samples; consider oversampling
 - **Systematic bias toward one predicted class** → Inspect column sums; the model may need `class_weight` balancing or threshold adjustment
 
+#### Confusion Matrix — XGBoost Results
+
+![Confusion Matrix](confusion_matrix.png)
+
+> **Key observations:**
+> - Strong diagonal across all 12 cancer types confirms the model's discriminative power
+> - The most notable confusion is between **LUAD ↔ LUSC** (18 LUAD misclassified as LUSC, 10 LUSC as LUAD) — both are lung cancers sharing overlapping mutational landscapes, making this biologically expected
+> - **LIHC** shows the most spread misclassifications (14 predicted as BRCA), likely due to shared TP53 and PIK3CA mutation patterns
+> - **UVM** (uveal melanoma) is the most challenging class — consistent with its unique mutational profile being underrepresented in the training set
+
 ### 5.3 SHAP as a Complementary Metric
 
 Beyond accuracy metrics, SHAP provides a **game-theoretic measure** of each gene's contribution to each prediction. A SHAP value of `+0.3` for TP53 in a prediction of GBM means that the presence of a TP53 mutation increased the log-odds of predicting GBM by 0.3 units, holding all other features constant.
 
 - **Global SHAP plot** — Ranks genes by mean absolute SHAP value across all samples and classes; reveals universally important mutation markers
 - **Per-class SHAP plots** — For each cancer type, shows the top 10 genes most responsible for predictions of that type
+
+#### Global SHAP Feature Importance
+
+![Global SHAP Importance](shap_global_importance.png)
+
+> **Key observations:**
+> - **TMB** (Tumour Mutation Burden) is the single most powerful feature by a large margin — a patient's overall mutation load is the strongest pan-cancer discriminator
+> - **TP53** is the most important individual gene (SHAP ≈ 0.40) — reflecting its role as the most commonly mutated gene across all cancer types
+> - **PIK3CA** and **APC** rank 3rd and 4th — both well-established oncogenes with cancer-type-specific mutation frequencies
+> - **VHL** appearing in the top 10 is driven entirely by KIRC (kidney cancer), where it is mutated in ~50% of patients — demonstrating the model correctly learned cancer-specific signals
+> - **BRAF** and **KRAS** represent key RAS/MAPK pathway members with distinct cancer-type distributions (BRAF dominant in SKCM, KRAS in LUAD/COAD)
+
+#### Per-class SHAP Driver Genes
+
+![Per-class SHAP](shap_per_class.png)
+
+> **Notable per-class findings:**
+> - **COAD**: APC dominates overwhelmingly (SHAP ≈ 1.4) — consistent with APC being the gatekeeper mutation in colorectal cancer
+> - **SKCM**: BRAF is the strongest signal — matching the known ~50% BRAF V600E mutation rate in melanoma
+> - **KIRC**: VHL is the top gene-level predictor — a hallmark of clear cell renal carcinoma
+> - **LUAD**: KRAS and EGFR are the top two genes — both clinically actionable driver mutations in lung adenocarcinoma
+> - **LIHC**: CTNNB1 (beta-catenin) is the top gene — consistent with Wnt pathway activation in hepatocellular carcinoma
+> - **UVM**: TMB dominates with very high SHAP (≈ 3.5) — uveal melanoma has a very low and distinct mutation burden, making TMB the key discriminator
 
 ---
 
