@@ -1,0 +1,71 @@
+# =========================
+# Python general
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# =========================
+# Virtual environment
+# =========================
+venv/
+.env/
+.env.*
+
+# =========================
+# Data & outputs (large/generated files)
+# =========================
+data/
+outputs/
+
+# =========================
+# GDC / Bioinformatics files
+# =========================
+*.maf
+*.tsv
+*.json
+*.txt
+
+# Keep important config if needed
+!requirements.txt
+
+# =========================
+# Executables & archives
+# =========================
+*.exe
+*.zip
+*.tar
+*.gz
+
+# =========================
+# Logs & temp files
+# =========================
+*.log
+*.tmp
+*.cache
+
+# =========================
+# Jupyter Notebook checkpoints
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# OS / Editor files
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =========================
+# Optional: keep structure but ignore contents
+# =========================
+# Uncomment if you want to keep empty folders tracked
+# !data/.gitkeep
+# !outputs/.gitkeep
