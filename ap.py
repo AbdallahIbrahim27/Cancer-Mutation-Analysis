@@ -265,4 +265,4 @@ else:
         ax.set_xlim(0, 1.05); ax.legend(fontsize=7.5, framealpha=0, labelcolor="#64748B")
         plt.tight_layout(pad=1.0); st.pyplot(fig, use_container_width=True); plt.close()
 
-st.markdown('''<div style="text-align:center;padding:2rem 0 .5rem;border-top:1px solid #1A2740;margin-top:2rem;"><div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:#1E2D3D;letter-spacing:.08em;">Abdullah Ibrahim & Ahmed Abdelkareem M.Sc. Candidates in Computer Science · AI Specialization · Cairo University.</div></div>''', unsafe_allow_html=True)
+st.markdown('''<div style="text-align:center;padding:2rem 0 .5rem;border-top:1px solid #1A2740;margin-top:2rem;"><div style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:#1E2D3D;letter-spacing:.08em;">Abdullah Ibrahiim & Ahmed Abdelkareem M.Sc. Candidates in Computer Science · AI Specialization · Cairo University.</div></div>''', unsafe_allow_html=True)
